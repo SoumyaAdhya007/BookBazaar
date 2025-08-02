@@ -27,12 +27,34 @@ const AvailableOrderStatuses = Object.values(orderStatusesEnum);
 const paymentTypesEnum = {
   CashOnDelivery: "cash_on_delivery",
   UPI: "upi",
-  Debit_Card: "debit_card",
+  DebitCard: "debit_card",
   CreditCard: "credit_card",
   NetBanking: "net_banking",
   Razorpay: "razorpay",
 };
 const AvailablePaymentTypes = Object.values(paymentTypesEnum);
+
+// payment Mode constants
+const paymentMethodsEnum = {
+  UPI: "upi",
+  DebitCard: "debit_card",
+  CreditCard: "credit_card",
+  NetBanking: "net_banking",
+  Wallet: "wallet",
+  EMI: "emi",
+  Other: "other",
+};
+const AvailablePaymentMethods = Object.values(paymentMethodsEnum);
+
+// payment status constants
+const paymentStatusesEnum = {
+  Created: "created",
+  Pending: "pending",
+  Success: "success",
+  Failed: "failed",
+  Refunded: "refunded",
+};
+const AvailablePaymentStatuses = Object.values(paymentStatusesEnum);
 
 export {
   userRolesEnum,
@@ -43,4 +65,8 @@ export {
   AvailableOrderStatuses,
   paymentTypesEnum,
   AvailablePaymentTypes,
+  paymentMethodsEnum,
+  AvailablePaymentMethods,
+  paymentStatusesEnum,
+  AvailablePaymentStatuses,
 };
