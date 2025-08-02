@@ -1,3 +1,4 @@
+// user role constants
 const userRolesEnum = {
   SuperAdmin: "super_admin",
   Admin: "admin",
@@ -5,4 +6,17 @@ const userRolesEnum = {
 };
 const AvailableUserRoles = Object.values(userRolesEnum);
 
-export { userRolesEnum, AvailableUserRoles };
+// api key status constants
+const apikeyStatusEnum = {
+  Active: "active",
+  Inactive: "inactive",
+  Revoked: "revoked",
+};
+const AvailableApiKeyStatuses = Object.values(apikeyStatusEnum);
+
+export {
+  userRolesEnum,
+  AvailableUserRoles,
+  apikeyStatusEnum,
+  AvailableApiKeyStatuses,
+};
