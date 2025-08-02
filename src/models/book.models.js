@@ -62,6 +62,8 @@ const bookSchema = new mongoose.Schema({
   previewLink: { type: String },
   infoLink: { type: String },
   canonicalVolumeLink: { type: String },
+},{
+    timestamps:true
 });
 
 bookSchema.index({ etag: 1, title: 1 });
