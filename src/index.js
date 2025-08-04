@@ -14,14 +14,14 @@ function main() {
     connectDB()
       .then(() => {
         server.listen(PORT, () => {
-          logger.info(`Server is running on ${PORT}`);
+          logger.info(`\n ⚙️ Server is running on ${PORT}`);
         });
       })
       .catch((err) => {
-        logger.error(`Mongodb connection error: ${err.message}`);
+        logger.error(`\n ❌ Mongodb connection error: ${err.message}`);
       });
   } catch (error) {
-    logger.error("Server error:", error.message);
+    logger.error("\n ❌ Server error:", error.message);
   }
 }
 

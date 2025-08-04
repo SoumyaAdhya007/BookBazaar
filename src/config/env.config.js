@@ -6,6 +6,7 @@ const envSchema = z.object({
   PORT: z.string().optional(),
   NODE_ENV: z.string(),
   LOG_LEVEL: z.string().optional(),
+  CORS_ORIGIN: z.string(),
   MONGO_URI: z.string(),
   ACCESS_TOKEN_SECRET: z.string(),
   ACCESS_TOKEN_EXPIRY: z.string(),
