@@ -1,5 +1,9 @@
 import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
+import crypto from "crypto";
+import jwt from "jsonwebtoken";
 import { userRolesEnum, AvailableUserRoles } from "../utils/constants.js";
+import env from "../config/env.config.js";
 const userSchema = new mongoose.Schema(
   {
     name: {
@@ -49,7 +53,53 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-userSchema.index({ email: 1 });
+// hash user password
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) return next();
+
+  const hashedPassword = await bcrypt.hash(
+    this.password,
+    Number(env.BCRYPT_SALT)
+  );
+  this.password = hashedPassword;
+
+  next();
+});
+
+// compare user given password with hashed password
+userSchema.methods.isPasswordCorrect = async function (password) {
+  return await bcrypt.compare(password, this.password);
+};
+
+// generate email verification token with expiry
+userSchema.methods.generateVerificationToken = function () {
+  const token = crypto.randomBytes(20).toString("hex");
+  const expiry = 24 * 60 * 60 * 1000; //1day
+
+  return { token, expiry };
+};
+
+// generate forget password email token with expiry
+userSchema.methods.generateForgetPasswordToken = function () {
+  const token = crypto.randomBytes(20).toString("hex");
+  const expiry = 60 * 60 * 1000; // 1hour
+
+  return { token, expiry };
+};
+
+// generate access token
+userSchema.methods.generateAccessToken = function () {
+  return jwt.sign({ id: this._id }, env.ACCESS_TOKEN_SECRET, {
+    expiresIn: env.ACCESS_TOKEN_EXPIRY,
+  });
+};
+// generate refresh token
+userSchema.methods.generateRefreshToken = function () {
+  return jwt.sign({ id: this._id }, env.REFRESH_TOKEN_SECRET, {
+    expiresIn: env.REFRESH_TOKEN_EXPIRY,
+  });
+};
+
 
 const User = mongoose.model("user", userSchema);
 
