@@ -8,6 +8,7 @@ const envSchema = z.object({
   LOG_LEVEL: z.string().optional(),
   CORS_ORIGIN: z.string(),
   MONGO_URI: z.string(),
+  BCRYPT_SALT: z.string(),
   ACCESS_TOKEN_SECRET: z.string(),
   ACCESS_TOKEN_EXPIRY: z.string(),
   REFRESH_TOKEN_SECRET: z.string(),
