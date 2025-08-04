@@ -28,12 +28,12 @@ import CartRouter from "../routes/cart.routes.js";
 import PaymentRouter from "../routes/payment.routes.js";
 import OrderRouter from "../routes/order.routes.js";
 
-app.use("/api/v1", AuthRouter);
-app.use("/api/v1", BookRouter);
-app.use("/api/v1", ReviewRouter);
-app.use("/api/v1", CartRouter);
-app.use("/api/v1", PaymentRouter);
-app.use("/api/v1", OrderRouter);
+app.use("/api/v1/auth", AuthRouter);
+app.use("/api/v1/book", BookRouter);
+app.use("/api/v1/review", ReviewRouter);
+app.use("/api/v1/cart", CartRouter);
+app.use("/api/v1/payment", PaymentRouter);
+app.use("/api/v1/order", OrderRouter);
 
 app.use(errorHandler);
 export default app;
