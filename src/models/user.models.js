@@ -40,10 +40,17 @@ const userSchema = new mongoose.Schema(
     verificationToken: {
       type: String,
     },
+    refreshToken: {
+      type: String,
+      required: true,
+    },
     resetPasswordToken: {
       type: String,
     },
     verificationExpires: {
+      type: Date,
+    },
+    refreshTokenExpires: {
       type: Date,
     },
     resetPasswordExpires: {
@@ -99,7 +106,6 @@ userSchema.methods.generateRefreshToken = function () {
     expiresIn: env.REFRESH_TOKEN_EXPIRY,
   });
 };
-
 
 const User = mongoose.model("user", userSchema);
 
