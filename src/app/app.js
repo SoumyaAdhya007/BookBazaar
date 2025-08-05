@@ -22,6 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // routes
 import AuthRouter from "../routes/auth.routes.js";
+import ApiKeyRouter from "../routes/apiKey.routes.js";
 import BookRouter from "../routes/book.routes.js";
 import ReviewRouter from "../routes/review.routes.js";
 import CartRouter from "../routes/cart.routes.js";
@@ -29,6 +30,7 @@ import PaymentRouter from "../routes/payment.routes.js";
 import OrderRouter from "../routes/order.routes.js";
 
 app.use("/api/v1/auth", AuthRouter);
+app.use("/api/v1/api-key", ApiKeyRouter);
 app.use("/api/v1/book", BookRouter);
 app.use("/api/v1/review", ReviewRouter);
 app.use("/api/v1/cart", CartRouter);
