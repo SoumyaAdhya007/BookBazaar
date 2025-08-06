@@ -23,6 +23,7 @@ import {
   forgotPasswordValidation,
   resetPasswordValidation,
 } from "../validations/auth.validations.js";
+import authAccessMiddleware from "../middlewares/auth.middlewares.js";
 
 const router = Router();
 
@@ -48,7 +49,7 @@ router
   );
 
 // generate new API key
-router.route("/api-key").post(generateApiKey);
+router.route("/api-key").get(authAccessMiddleware, generateApiKey);
 
 // refresh access token
 router
@@ -56,7 +57,7 @@ router
   .post(validateData(refreshAccessTokenValidation), refreshAccessToken);
 
 // get user profile
-router.route("/me").get(getUserProfile);
+router.route("/me").get(authAccessMiddleware, getUserProfile);
 
 // forgot password email
 router
