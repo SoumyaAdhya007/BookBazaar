@@ -13,6 +13,8 @@ const envSchema = z.object({
   ACCESS_TOKEN_EXPIRY: z.string(),
   REFRESH_TOKEN_SECRET: z.string(),
   REFRESH_TOKEN_EXPIRY: z.string(),
+  APIKEY_TOKEN_SECRET: z.string(),
+  APIKEY_TOKEN_EXPIRY: z.string(),
   MAILTRAP_SMTP_HOST: z.string(),
   MAILTRAP_SMTP_PORT: z.string(),
   MAILTRAP_SMTP_USERNAME: z.string(),
