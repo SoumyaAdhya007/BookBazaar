@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import {
-  apikeyStatusEnum,
+  apikeyStatusesEnum,
   AvailableApiKeyStatuses,
 } from "../utils/constants.js";
 const apikeySchema = new mongoose.Schema(
@@ -13,7 +13,7 @@ const apikeySchema = new mongoose.Schema(
     name: {
       type: String,
       trim: true,
-      required: true,
+      default: "My API Key",
     },
     description: {
       type: String,
@@ -27,7 +27,7 @@ const apikeySchema = new mongoose.Schema(
     status: {
       type: String,
       enum: AvailableApiKeyStatuses,
-      default: apikeyStatusEnum.Active,
+      default: apikeyStatusesEnum.Active,
     },
     keyExpiry: {
       type: Date,
@@ -35,10 +35,11 @@ const apikeySchema = new mongoose.Schema(
     },
     limit: {
       type: Number,
-      required: true,
+      default: 1000,
     },
     useCount: {
       type: Number,
+      default: 0,
     },
     lastUsed: {
       type: Date,
@@ -51,8 +52,6 @@ const apikeySchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-
-apikeySchema.index({ key: 1 });
 
 const ApiKey = mongoose.model("apikey", apikeySchema);
 
