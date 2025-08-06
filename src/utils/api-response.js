@@ -1,14 +1,13 @@
-
 class ApiResponse {
-    /**
-     * 
-     * @param {number} statusCode 
-     * @param {any} data 
-     * @param {string} message 
-     */
-  constructor(statusCode, data, message) {
+  /**
+   *
+   * @param {number} statusCode
+   * @param {string} message
+   * @param {any} data
+   */
+  constructor(statusCode, message, data) {
     this.statusCode = statusCode;
-    this.success = success < 400;
+    this.success = statusCode < 400;
     this.message = message;
     this.data = data;
   }
