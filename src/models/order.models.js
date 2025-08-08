@@ -16,7 +16,7 @@ const orderSchema = new mongoose.Schema(
       {
         bookId: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: "user",
+          ref: "book",
           required: true,
         },
         quantity: {
@@ -27,7 +27,7 @@ const orderSchema = new mongoose.Schema(
         },
         priceAtPurchased: {
           type: Number,
-          required,
+          required: true,
         },
       },
     ],
@@ -50,7 +50,6 @@ const orderSchema = new mongoose.Schema(
     paymentType: {
       type: String,
       enum: AvailablePaymentTypes,
-      required: true,
     },
     status: {
       type: String,
