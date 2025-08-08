@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import ApiError from "../utils/api-error";
+import ApiError from "../utils/api-error.js";
 import asyncHandler from "../utils/async-handler.js";
 import env from "../config/env.config.js";
 import ApiKey from "../models/apikey.models.js";
