@@ -19,6 +19,8 @@ const envSchema = z.object({
   MAILTRAP_SMTP_PORT: z.string(),
   MAILTRAP_SMTP_USERNAME: z.string(),
   MAILTRAP_SMTP_PASSWORD: z.string(),
+  RAZORPAY_KEY_ID: z.string(),
+  RAZORPAY_KEY_SECRET: z.string(),
   FORGOT_PASSWORD_REDIRECT_URL: z.string(),
 });
 const env = envSchema.parse(process.env);
