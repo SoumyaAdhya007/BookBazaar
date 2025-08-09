@@ -17,17 +17,13 @@ const paymentSchema = new mongoose.Schema(
     },
     razorpayOrderId: {
       type: String,
-      unique: true,
       required: true,
     },
     razorpayPaymentId: {
       type: String,
-      unique: true,
-      required: true,
     },
     razorpaySignature: {
       type: String,
-      required: true,
     },
     amount: {
       type: Number,
@@ -46,7 +42,6 @@ const paymentSchema = new mongoose.Schema(
     method: {
       type: String,
       enum: AvailablePaymentMethods,
-      required: true,
     },
     paymentDetails: {
       type: mongoose.Schema.Types.Mixed,
@@ -56,7 +51,7 @@ const paymentSchema = new mongoose.Schema(
     },
   },
   {
-    timestamps: true, // adds createdAt and updatedAt
+    timestamps: true,
   }
 );
 
