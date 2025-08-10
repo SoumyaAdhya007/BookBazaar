@@ -18,7 +18,29 @@ const postBooks = asyncHandler(async (req, res) => {
 });
 
 const getAllBooks = asyncHandler(async (req, res) => {
-  const books = await Book.find();
+  let { search, sort, page, limit } = req.query;
+  page = page ? Number(page) : 1;
+  limit = limit ? Number(limit) : 10;
+  const filter = {};
+  const sortOptions = {};
+
+  if (search) {
+    filter["$or"] = [
+      { title: { $regex: search, $options: "i" } },
+      { authors: { $regex: search, $options: "i" } },
+      { genre: { $regex: search, $options: "i" } },
+    ];
+  }
+
+  if (sort) {
+    const [field, option] = sort.split(":");
+    sortOptions[field] = option === "asc" ? 1 : -1;
+  }
+
+  const books = await Book.find(filter)
+    .sort(sortOptions)
+    .skip((page - 1) * 10)
+    .limit(limit);
 
   res
     .status(200)
