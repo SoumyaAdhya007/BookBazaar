@@ -1,8 +1,10 @@
 import CartItem from "../models/cartItem.models.js";
 import Order from "../models/order.models.js";
+import User from "../models/user.models.js";
 import ApiError from "../utils/api-error.js";
 import ApiResponse from "../utils/api-response.js";
 import asyncHandler from "../utils/async-handler.js";
+import { orderConfirmationEMail, sendMail } from "../utils/mail.js";
 
 const placeOrder = asyncHandler(async (req, res) => {
   const { cartId } = req.params;
@@ -10,6 +12,7 @@ const placeOrder = asyncHandler(async (req, res) => {
   const { shippingAddress, billingAddress } = req.body;
 
   const cartItems = await CartItem.find({ cartId }).populate("bookId");
+  const user = await User.findById(userId);
   if (cartItems.length === 0) {
     throw new ApiError(400, "Cart is empty.");
   }
@@ -30,6 +33,8 @@ const placeOrder = asyncHandler(async (req, res) => {
     shippingAddress,
     billingAddress,
   });
+  const emailContent = orderConfirmationEMail(user.name, books,order._id);
+  await sendMail(user.email, "Your Order placed Successfully", emailContent);
   res
     .status(201)
     .json(new ApiResponse(201, "Order placed Successfully.", order));
