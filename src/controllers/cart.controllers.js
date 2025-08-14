@@ -55,19 +55,25 @@ const addItemToCart = asyncHandler(async (req, res) => {
 
 const getCartItems = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  const cartItem = await CartItem.find({
+  const cartItems = await CartItem.find({
     cartId: id,
+    isOrdered: false,
   });
   res
     .status(200)
-    .json(new ApiResponse(200, "Cart items retrieved successfully.", cartItem));
+    .json(
+      new ApiResponse(200, "Cart items retrieved successfully.", cartItems)
+    );
 });
 
 const removeCartItem = asyncHandler(async (req, res) => {
   const { cartItemId } = req.params;
 
-  const cartItem = await CartItem.findByIdAndDelete(cartItemId);
+  const cartItem = await CartItem.findById(cartItemId);
 
+  if (cartItem.isOrdered) {
+    throw new ApiError(400, "Ordered cart item cannot be deleted");
+  }
   if (!cartItem) {
     throw new ApiError(404, "CartItem does not exist.");
   }
