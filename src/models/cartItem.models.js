@@ -22,6 +22,14 @@ const cartItemSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    isOrdered: {
+      type: Boolean,
+      default: false,
+    },
+    orderId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "order",
+    },
   },
   { timestamps: true }
 );
