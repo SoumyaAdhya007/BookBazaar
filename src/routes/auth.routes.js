@@ -4,6 +4,7 @@ import {
   emailVerify,
   forgotPassword,
   generateApiKey,
+  getApiKeys,
   getUserProfile,
   loginUser,
   refreshAccessToken,
@@ -50,6 +51,7 @@ router
 
 // generate new API key
 router.route("/api-key").get(authAccessMiddleware, generateApiKey);
+router.route("/api-key/all").get(authAccessMiddleware, getApiKeys);
 
 // refresh access token
 router
