@@ -111,6 +111,18 @@ const generateApiKey = asyncHandler(async (req, res) => {
     .json(new ApiResponse(201, "API key generated successfully", apiKey));
 });
 
+// get all API keys
+const getApiKeys = asyncHandler(async (req, res) => {
+  const userId = req.user.id;
+  const apiKeys = await ApiKey.find({
+    userId,
+  });
+
+  res
+    .status(201)
+    .json(new ApiResponse(201, "API key generated successfully", apiKeys));
+});
+
 // refresh access token
 const refreshAccessToken = asyncHandler(async (req, res) => {});
 
@@ -145,6 +157,7 @@ export {
   emailVerify,
   resendEmailVerification,
   generateApiKey,
+  getApiKeys,
   refreshAccessToken,
   getUserProfile,
   forgotPassword,
